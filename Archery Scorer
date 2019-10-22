@@ -1,0 +1,76 @@
+#Maurice Koh
+#zhi.koh1@marist.edu
+#Archery Scorer
+
+
+from graphics import *
+import math
+
+#distance from the center of the circle formula
+def arrows(p, ring):
+    x = p.getX() - ring.getCenter().getX()
+    y = p.getY() - ring.getCenter().getY()
+    dist= math.sqrt(x*x + y*y)
+    return dist <= ring.getRadius()
+
+def main():
+    win=GraphWin ("Bullseye")
+#White Circle    
+    White=Circle(Point(50,50),40)
+    White.setOutline("Black")
+    White.setFill("White")
+    White.draw(win)
+#Black Circle
+    Black=Circle(Point(50,50),30)
+    Black.setOutline("Black")
+    Black.setFill("Black")
+    Black.draw(win)
+#Blue Circle
+    Blue=Circle(Point(50,50),20)
+    Blue.setOutline("Black")
+    Blue.setFill("Blue")
+    Blue.draw(win)
+#Red Circle
+    Red=Circle(Point(50,50),10)
+    Red.setOutline("Black")
+    Red.setFill("Red")
+    Red.draw(win)
+#Yellow Circle
+    Yellow=Circle(Point(50,50),5)
+    Yellow.setOutline("Black")
+    Yellow.setFill("Yellow")
+    Yellow.draw(win)
+
+#Calculates the score and the number of clicks
+    totalscore = 0
+    for i in range (5):
+        p=win.getMouse()
+
+        if (arrows(p, Yellow)):
+            totalscore = totalscore + 9
+            print("You hit a bulleye gained 9 points")
+        elif (arrows(p, Red)):
+           totalscore = totalscore + 7
+           print("You hit Red and gained 7 points")
+        elif (arrows(p, Blue)):
+            totalscore = totalscore + 5
+            print("You hit Blue and gained 5 points")
+        elif (arrows(p, Black)):
+            totalscore= totalscore + 3
+            print("You hit Black and gained 3 points")
+        elif (arrows(p, White)):
+            totalscore = totalscore + 1
+            print("You hit White and gained 1 points")
+        else:
+            totalscore=totalscore + 0
+            print("You miss, try again")
+
+        print("You now have an accumalated score of: ",(totalscore))
+
+#Print the total score
+    print("Congragulations! Your total score is: ", (totalscore))
+
+
+
+main()
+
